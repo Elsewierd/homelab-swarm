@@ -1,0 +1,11 @@
+networks:
+  server:
+    driver: bridge
+
+include:
+  - path: 
+    - ./compose/jellyfin.yaml
+    - ./compose/plex.yaml
+    - ./compose/watchtower.yaml
+    env_file:
+      - ./environment/.env
