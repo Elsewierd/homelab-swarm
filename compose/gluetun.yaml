@@ -1,0 +1,40 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+
+    container_name: gluetun
+
+    hostname: gluetun
+
+    cap_add:
+      - NET_ADMIN
+    
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    
+    env_file:
+      - path: ../environment/gluetun.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      # VPN Setup
+      - VPN_SERVICE_PROVIDER=${VPN}
+      - VPN_TYPE=${VPN_TYPE}
+      - UPDATER_PERIOD=${UPDATE}
+      # OpenVPN:
+      - OPENVPN_USER=${OVPN_USER}
+      - OPENVPN_PASSWORD=${OVPN_PASS}
+      # Wireguard:
+      - WIREGUARD_PRIVATE_KEY=${WG_KEY}
+      - WIREGUARD_ADDRESSES=${WG_IP}
+    
+    volumes:
+      - ${CONFIG}/gluetun:/gluetun
+
+    ports:
+      - ${HTTP}:8888/tcp      # HTTP proxy
+      - ${SOCK_TCP}:8388/tcp  # Shadowsocks
+      - ${SOCK_UDP}:8388/udp  # Shadowsocks
+      

@@ -4,6 +4,7 @@ networks:
 
 include:
   - path: 
+    - ./compose/gluetun.yaml
     - ./compose/jellyfin.yaml
     - ./compose/plex.yaml
     - ./compose/watchtower.yaml

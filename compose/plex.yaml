@@ -1,17 +1,38 @@
 services:
   plex:
     image: lscr.io/linuxserver/plex:latest
+    
     container_name: plex
+    hostname: plex.spear-and-bow
+
     networks:
       - server
+    
+    env_file:
+      - path: ../environment/plex.env
+    
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
       - VERSION=docker
       - PLEX_CLAIM= #optional
+      - ADVERTISE_IP="http://${HOST_IP}"
+
     volumes:
       - ${CONFIG}/plex:/config
-      - ${MEDIA}/tv-shows:/tv
-      - ${MEDIA}/movies:/movies
+      - ${CONFIG}/plex-cache:/transcode
+      - ${MEDIA}:/data
+    
+    ports:
+      - ${UI}:32400/tcp # Plex Media Server
+      - ${DLNA_UDP}:1900/udp  # Plex DLNA Server
+      - ${DLNA_TCP}:32469/tcp # Plex DLNA Server
+      - ${ROKU}:8324/tcp  # Plex for Roku via Plex Companion
+      - ${BONJOUR}:5353/udp  # Bonjour/Avahi Discovery
+      - ${GDM1}:32410/udp # GDM Discovery
+      - ${GDM2}:32412/udp # GDM Discovery
+      - ${GDM3}:32413/udp # GDM Discovery
+      - ${GDM4}:32414/udp # GDM Discovery
+      
     restart: unless-stopped
