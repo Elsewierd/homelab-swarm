@@ -1,0 +1,26 @@
+services:
+  nzbget:
+
+    image: lscr.io/linuxserver/nzbget:latest
+  
+    container_name: nzbget
+  
+    depends_on: gluetun
+    
+    network_mode: ${NETWORK}
+  
+    env_file: ./environment/nzbget.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=${NZB_UI}
+      - NZBGET_USER=${USER}       # [optional]
+      - NZBGET_PASS=${PASS}       # [optional]
+  
+    volumes:
+      - ${CONFIG}/nzbget:/config
+      - ${USENET}:/data/usenet    # [optional]
+  
+    restart: unless-stopped

@@ -5,11 +5,9 @@ services:
     container_name: plex
     hostname: plex.spear-and-bow
 
-    networks:
-      - server
+    networks: server
     
-    env_file:
-      - path: ../environment/plex.env
+    env_file: ./environment/plex.env
     
     environment:
       - PUID=${PUID}

@@ -1,0 +1,24 @@
+services:
+  prowlarr:
+
+    image: lscr.io/linuxserver/prowlarr:latest
+
+    container_name: prowlarr
+
+    depends_on: gluetun
+
+    network_mode: ${NETWORK}
+
+    env_file:
+      - ./environment/arr.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=${PROWL_UI}
+
+    volumes:
+      - ${CONFIG}/prowlarr:/config
+
+    restart: unless-stopped

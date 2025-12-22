@@ -3,10 +3,14 @@ networks:
     driver: bridge
 
 include:
-  - path: 
-    - ./compose/gluetun.yaml
-    - ./compose/jellyfin.yaml
-    - ./compose/plex.yaml
-    - ./compose/watchtower.yaml
+  - project_directory: .
+  - path:
+    - ./compose/utilites/deunhealth.yaml
+    - ./compose/utilites/gluetun.yaml
+    - ./compose/streaming/jellyfin.yaml
+    - ./compose/download/nzbget.yaml
+    - ./compose/streaming/plex.yaml
+    - ./compose/download/qbittorrent.yaml
+    - ./compose/utilites/watchtower.yaml
     env_file:
       - ./environment/.env

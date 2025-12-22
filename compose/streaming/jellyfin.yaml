@@ -4,11 +4,9 @@ services:
 
     container_name: jellyfin
 
-    networks:
-      - server
+    networks: server
 
-    env_file:
-      - path: ../environment/jellyfin.env
+    env_file: ./environment/jellyfin.env
 
     environment:
       - PUID=${PUID}
