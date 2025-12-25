@@ -1,0 +1,28 @@
+services:
+
+  sonarr-anime:
+
+    image: lscr.io/linuxserver/sonarr:latest
+
+    container_name: sonarr-anime
+
+    networks: server
+
+    env_file: ./environment/arr.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - SONARR__AUTH__APIKEY=${SONA_API}
+      - SONARR__AUTH__REQUIRED=DisabledForLocalAddresses
+      - SONARR__UPDATE__MECHANISM=external   
+    
+    volumes:
+      - ${CONFIG}/sonarr-anime:/config
+      - ${DATA}:/data
+
+    ports:
+      - ${SONA_UI}:8989
+
+    restart: unless-stopped

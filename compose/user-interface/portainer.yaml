@@ -1,0 +1,22 @@
+services:
+  portainer:
+    
+    image: portainer/portainer-ce:latest
+
+    container_name: portainer
+
+    networks: server
+
+    env_file: ./environment/portainer.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - COMPOSE_HTTP_TIMEOUT=${TIMEOUT}
+
+    volumes:
+      -${CONFIG}/portainer:/data
+
+    ports:
+      -${UI}:9000

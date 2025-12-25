@@ -1,0 +1,28 @@
+services:
+
+  radarr:
+
+    image: lscr.io/linuxserver/radarr:latest
+
+    container_name: radarr
+
+    networks: server
+
+    env_file: ./environment/arr.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - RADARR__AUTH__APIKEY=${RAD_API}
+      - RADARR__AUTH__REQUIRED=DisabledForLocalAddresses
+      - RADARR__UPDATE__MECHANISM=external   
+    
+    volumes:
+      - ${CONFIG}/radarr:/config
+      - ${DATA}:/data
+
+    ports:
+      - ${RAD_UI}:7878
+
+    restart: unless-stopped

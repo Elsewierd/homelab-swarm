@@ -1,3 +1,6 @@
+
+# docker-compose.yaml
+
 networks:
   server:
     driver: bridge
@@ -5,12 +8,22 @@ networks:
 include:
   - project_directory: .
   - path:
-    - ./compose/utilites/deunhealth.yaml
-    - ./compose/utilites/gluetun.yaml
-    - ./compose/streaming/jellyfin.yaml
+    - ./compose/arr-stack/jellyseer.yaml
+    - ./compose/arr-stack/lazylibrarian.yaml
+    - ./compose/arr-stack/lidarr.yaml
+    - ./compose/arr-stack/prowlarr.yaml
+    - ./compose/arr-stack/radarr-anime.yaml
+    - ./compose/arr-stack/radarr.yaml
+    - ./compose/arr-stack/readarr.yaml
+    - ./compose/arr-stack/sonarr-anime.yaml
+    - ./compose/arr-stack/sonarr.yaml
+    - ./compose/arr-stack/speakarr.yaml
     - ./compose/download/nzbget.yaml
-    - ./compose/streaming/plex.yaml
     - ./compose/download/qbittorrent.yaml
-    - ./compose/utilites/watchtower.yaml
+    - ./compose/streaming/jellyfin.yaml
+    - ./compose/streaming/plex.yaml
+    - ./compose/utilities/denuhealth.yaml
+    - ./compose/utilities/gluetun.yaml
+    - ./compose/utilities/watchtower.yaml
     env_file:
       - ./environment/.env

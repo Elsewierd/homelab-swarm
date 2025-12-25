@@ -1,0 +1,28 @@
+services:
+
+  readarr:
+
+    image: lscr.io/linuxserver/readarr:latest
+
+    container_name: readarr
+
+    networks: server
+
+    env_file: ./environment/arr.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - READARR__AUTH__APIKEY=${READ_API}
+      - READARR__AUTH__REQUIRED=DisabledForLocalAddresses
+      - READARR__UPDATE__MECHANISM=external   
+    
+    volumes:
+      - ${CONFIG}/readarr:/config
+      - ${DATA}:/data
+
+    ports:
+      - ${READ_UI}:8686
+
+    restart: unless-stopped

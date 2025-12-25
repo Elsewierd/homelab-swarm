@@ -1,0 +1,28 @@
+services:
+
+  lidarr:
+
+    image: lscr.io/linuxserver/lidarr:latest
+
+    container_name: lidarr
+
+    networks: server
+
+    env_file: ./environment/arr.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - LIDARR__AUTH__APIKEY=${LID_API}
+      - LIDARR__AUTH__REQUIRED=DisabledForLocalAddresses
+      - LIDARR__UPDATE__MECHANISM=external   
+    
+    volumes:
+      - ${CONFIG}/lidarr:/config
+      - ${DATA}:/data
+
+    ports:
+      - ${LID_UI}:8686
+
+    restart: unless-stopped

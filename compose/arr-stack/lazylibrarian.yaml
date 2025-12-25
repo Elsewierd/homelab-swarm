@@ -1,0 +1,25 @@
+services:
+  lazylibrarian:
+
+    image: lscr.io/linuxserver/lazylibrarian:latest
+  
+    container_name: lazylibrarian
+
+    networks: server
+  
+    env_file: ./environment/arr.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DOCKER_MODS=linuxserver/mods:universal-calibre|linuxserver/mods:lazylibrarian-ffmpeg #optional
+   
+    volumes:
+      - ${CONFIG}/lazylibrarian:/config
+      - ${DATA}:/data
+   
+    ports:
+      - ${LL_UI}:5299
+   
+    restart: unless-stopped

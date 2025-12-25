@@ -1,0 +1,28 @@
+services:
+
+  radarr-anime:
+
+    image: lscr.io/linuxserver/radarr:latest
+
+    container_name: radarr-anime
+
+    networks: server
+
+    env_file: ./environment/arr.env
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - RADARR__AUTH__APIKEY=${RADA_API}
+      - RADARR__AUTH__REQUIRED=DisabledForLocalAddresses
+      - RADARR__UPDATE__MECHANISM=external   
+    
+    volumes:
+      - ${CONFIG}/radarr-anime:/config
+      - ${DATA}:/data
+
+    ports:
+      - ${RADA_UI}:7878
+
+    restart: unless-stopped
