@@ -5,7 +5,8 @@ services:
 
     container_name: prowlarr
 
-    depends_on: gluetun
+    depends_on:
+      - gluetun
 
     network_mode: ${NETWORK}
 

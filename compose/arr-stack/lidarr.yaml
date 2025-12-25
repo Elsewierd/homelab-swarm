@@ -6,9 +6,11 @@ services:
 
     container_name: lidarr
 
-    networks: server
+    networks:
+      - server
 
-    env_file: ./environment/arr.env
+    env_file:
+      - ./environment/arr.env
 
     environment:
       - PUID=${PUID}

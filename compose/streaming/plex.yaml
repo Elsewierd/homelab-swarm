@@ -5,16 +5,18 @@ services:
     container_name: plex
     hostname: plex.spear-and-bow
 
-    networks: server
+    networks:
+      - server
     
-    env_file: ./environment/plex.env
+    env_file:
+      - ./environment/plex.env
     
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
       - VERSION=docker
-      - PLEX_CLAIM= #optional
+      # - PLEX_CLAIM= #optional
       - ADVERTISE_IP="http://${HOST_IP}"
 
     volumes:

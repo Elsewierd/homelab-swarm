@@ -4,11 +4,13 @@ services:
     
     container_name: qbittorrent
     
-    depends_on: gluetun
+    depends_on:
+      - gluetun
 
     network_mode: "${NETWORK}"
 
-    env_file: ./environment/qbittorrent.env
+    env_file:
+      - ./environment/qbittorrent.env
 
     environment:
       - PUID=${PUID}
@@ -20,4 +22,5 @@ services:
     volumes:
       - ${CONFIG}/qbittorrent:/config
       - ${STORAGE}:/data/torrents
+      
     restart: unless-stopped

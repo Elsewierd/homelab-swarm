@@ -5,11 +5,13 @@ services:
   
     container_name: nzbget
   
-    depends_on: gluetun
+    depends_on:
+      - gluetun
     
     network_mode: ${NETWORK}
   
-    env_file: ./environment/nzbget.env
+    env_file:
+      - ./environment/nzbget.env
 
     environment:
       - PUID=${PUID}

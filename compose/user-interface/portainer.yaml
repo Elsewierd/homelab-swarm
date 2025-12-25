@@ -5,9 +5,11 @@ services:
 
     container_name: portainer
 
-    networks: server
+    networks:
+      - server
 
-    env_file: ./environment/portainer.env
+    env_file:
+      - ./environment/portainer.env
 
     environment:
       - PUID=${PUID}
